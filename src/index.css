@@ -1,0 +1,580 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap");
+
+:root {
+  --primary-pink: #e8b4d0;
+  --primary-purple: #b19cd9;
+  --primary-blue: #a7c5e8;
+  --primary-green: #a8d5c1;
+  --dark-purple: #6a5acd;
+  --text-dark: #333;
+  --text-light: #666;
+  --white: #ffffff;
+  --light-bg: #fafafa;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: "Poppins", sans-serif;
+  transition: var(--transition);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.divider {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-pink),
+    var(--primary-purple),
+    var(--primary-blue),
+    var(--primary-green)
+  );
+  margin: 1rem auto;
+  border-radius: 3px;
+}
+
+/* Header Styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  z-index: 1000;
+  transition: var(--transition);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.header.scrolled {
+  padding: 1rem 5%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1 {
+  font-size: 2rem;
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav button {
+  font-size: 1rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+nav button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  transition: var(--transition);
+}
+
+nav button:hover::after,
+nav button.active::after {
+  width: 100%;
+}
+
+.book-appointment-btn {
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+}
+
+.book-appointment-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(106, 90, 205, 0.4);
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  margin-top: 80px;
+  background: linear-gradient(
+    135deg,
+    rgba(232, 180, 208, 0.1),
+    rgba(167, 197, 232, 0.1)
+  );
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+  animation: fadeInLeft 1s ease;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 0.85rem 2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.primary-btn {
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
+}
+
+.secondary-btn {
+  border: 2px solid var(--primary-purple);
+  color: var(--primary-purple);
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-3px);
+}
+
+.hero-image {
+  flex: 1;
+  height: 500px;
+  background-image: url("https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80");
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeInRight 1s ease;
+}
+
+/* About Section */
+.about {
+  padding: 5rem 5%;
+  background-color: var(--light-bg);
+}
+
+.health-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.health-card {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.health-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Stylists Section */
+.stylists {
+  padding: 5rem 5%;
+}
+
+.stylists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stylist-card {
+  background: var(--white);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.stylist-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stylist-image {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.stylist-card h3 {
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-size: 1.5rem;
+}
+
+.specialty {
+  color: var(--primary-purple);
+  font-weight: 500;
+  padding: 0 1.5rem;
+  font-size: 0.9rem;
+}
+
+.stylist-card p {
+  padding: 0 1.5rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.book-btn {
+  display: block;
+  width: calc(100% - 3rem);
+  margin: 0 1.5rem 1.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(
+    90deg,
+    var(--primary-purple),
+    var(--primary-blue)
+  );
+  color: var(--white);
+  border-radius: 30px;
+  font-weight: 500;
+}
+
+.book-btn:hover {
+  background: linear-gradient(
+    90deg,
+    var(--primary-blue),
+    var(--primary-purple)
+  );
+}
+
+/* Practices Section */
+.practices {
+  padding: 5rem 5%;
+  background-color: var(--light-bg);
+}
+
+.practices-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.practice-item {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.practice-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.practice-item h3 {
+  color: var(--primary-purple);
+  margin-bottom: 1rem;
+}
+
+/* Reviews Section */
+.reviews {
+  padding: 5rem 5%;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.review-card {
+  background: var(--white);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.review-stars {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.reviewer {
+  font-style: italic;
+  text-align: right;
+  margin-top: 1rem;
+  color: var(--primary-purple);
+  font-weight: 500;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(
+    135deg,
+    rgba(106, 90, 205, 0.9),
+    rgba(167, 197, 232, 0.9)
+  );
+  color: var(--white);
+  padding: 3rem 5% 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-logo h2 {
+  color: var(--white);
+  margin: 0;
+}
+
+.footer-logo span {
+  display: block;
+  font-size: 0.9rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+}
+
+.footer-info h3,
+.footer-hours h3,
+.footer-social h3 {
+  color: var(--white);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-info h3::after,
+.footer-hours h3::after,
+.footer-social h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--primary-pink);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: var(--white);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.social-icons a:hover {
+  color: var(--primary-pink);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .book-appointment-btn {
+    margin-top: 1rem;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    margin-bottom: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 300px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
