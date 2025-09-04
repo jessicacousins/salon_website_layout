@@ -1,6 +1,6 @@
 # Salon Website
 
-Responsive web application built with React and Vite, designed to showcase a salon's services, team, and booking options.
+Responsive web application built with Vite - React. Designed to showcase a salon's services, team, and booking options.
 
 ## Features
 
