@@ -5,10 +5,58 @@ function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
 
+  //  Lookbook filter
+  const [filter, setFilter] = useState("All");
+  const lookbook = [
+    {
+      id: 1,
+      category: "Color",
+      img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+      alt: "Dimensional brunette color with glossed finish",
+      caption: "Dimensional brunette gloss • low-maintenance shine",
+    },
+    {
+      id: 2,
+      category: "Cuts",
+      img: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1200&auto=format&fit=crop",
+      alt: "Precision bob haircut with soft texture",
+      caption: "Precision bob • grows out beautifully",
+    },
+    {
+      id: 3,
+      category: "Texture",
+      img: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
+      alt: "Defined curls with hydrated finish",
+      caption: "Curly shaping • definition without crunch",
+    },
+    {
+      id: 4,
+      category: "Scalp",
+      img: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?q=80&w=1200&auto=format&fit=crop",
+      alt: "Relaxing scalp therapy session",
+      caption: "Scalp therapy • calm, balanced roots",
+    },
+    {
+      id: 5,
+      category: "Color",
+      img: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=1200&auto=format&fit=crop",
+      alt: "Lived-in blonde balayage",
+      caption: "Lived-in balayage • blended foils",
+    },
+    {
+      id: 6,
+      category: "Cuts",
+      img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop",
+      alt: "Long layers with polished finish",
+      caption: "Long layers • polished movement",
+    },
+  ];
+
+  const visibleItems =
+    filter === "All" ? lookbook : lookbook.filter((i) => i.category === filter);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -19,6 +67,19 @@ function App() {
       element.scrollIntoView({ behavior: "smooth" });
       setActiveSection(sectionId);
     }
+  };
+
+  const handleBookSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    form.reset();
+
+    const msg = document.createElement("div");
+    msg.className = "inline-success";
+    msg.textContent =
+      "Thanks! We’ll confirm your appointment by email within one business day.";
+    form.parentNode.insertBefore(msg, form.nextSibling);
+    setTimeout(() => msg.remove(), 5000);
   };
 
   return (
@@ -43,6 +104,7 @@ function App() {
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://luminehairstudio.com" />
 
+      {/* Header */}
       <header className={`header ${isScrolled ? "scrolled" : ""}`}>
         <div className="logo">
           <h1>Luminé</h1>
@@ -76,6 +138,14 @@ function App() {
             </li>
             <li>
               <button
+                onClick={() => scrollToSection("lookbook")}
+                className={activeSection === "lookbook" ? "active" : ""}
+              >
+                Lookbook
+              </button>
+            </li>
+            <li>
+              <button
                 onClick={() => scrollToSection("practices")}
                 className={activeSection === "practices" ? "active" : ""}
               >
@@ -92,9 +162,15 @@ function App() {
             </li>
           </ul>
         </nav>
-        <button className="book-appointment-btn">Book Now</button>
+        <button
+          className="book-appointment-btn"
+          onClick={() => scrollToSection("book")}
+        >
+          Book Now
+        </button>
       </header>
 
+      {/* Hero */}
       <section id="home" className="hero">
         <div className="hero-content">
           <h1>Where Art Meets Science</h1>
@@ -120,6 +196,7 @@ function App() {
         <div className="hero-image"></div>
       </section>
 
+      {/* About */}
       <section id="about" className="about">
         <div className="section-header">
           <h2>Hair & Skin Health</h2>
@@ -160,6 +237,7 @@ function App() {
         </div>
       </section>
 
+      {/* Stylists */}
       <section id="stylists" className="stylists">
         <div className="section-header">
           <h2>Our Expert Stylists</h2>
@@ -177,7 +255,7 @@ function App() {
               className="stylist-image"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1593089608156-3e1a839e5e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
+                  "url('https://images.unsplash.com/photo-1593089608156-3e1a839e5e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')",
               }}
             ></div>
             <h3>Sophia Reynolds</h3>
@@ -187,7 +265,12 @@ function App() {
               natural-looking color applications and expertise in the latest
               highlighting techniques.
             </p>
-            <button className="book-btn">Book with Sophia</button>
+            <button
+              className="book-btn"
+              onClick={() => scrollToSection("book")}
+            >
+              Book with Sophia
+            </button>
           </div>
 
           <div className="stylist-card">
@@ -195,7 +278,7 @@ function App() {
               className="stylist-image"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1599553485484-1d35e0eda9e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
+                  "url('https://images.unsplash.com/photo-1599553485484-1d35e0eda9e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')",
               }}
             ></div>
             <h3>Marcus Chen</h3>
@@ -205,7 +288,12 @@ function App() {
               styles that are both modern and timeless. His cuts grow out
               beautifully.
             </p>
-            <button className="book-btn">Book with Marcus</button>
+            <button
+              className="book-btn"
+              onClick={() => scrollToSection("book")}
+            >
+              Book with Marcus
+            </button>
           </div>
 
           <div className="stylist-card">
@@ -213,7 +301,7 @@ function App() {
               className="stylist-image"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1584308972272-9e4e7685e80f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
+                  "url('https://images.unsplash.com/photo-1584308972272-9e4e7685e80f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')",
               }}
             ></div>
             <h3>Elena Rodriguez</h3>
@@ -223,7 +311,12 @@ function App() {
               conditions. Her holistic approach has helped countless clients
               restore their hair's vitality.
             </p>
-            <button className="book-btn">Book with Elena</button>
+            <button
+              className="book-btn"
+              onClick={() => scrollToSection("book")}
+            >
+              Book with Elena
+            </button>
           </div>
 
           <div className="stylist-card">
@@ -231,7 +324,7 @@ function App() {
               className="stylist-image"
               style={{
                 backgroundImage:
-                  "url('https://images.unsplash.com/photo-1568702449335-1b5f1a1a5a5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
+                  "url('https://images.unsplash.com/photo-1568702449335-1b5f1a1a5a5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')",
               }}
             ></div>
             <h3>Aisha Johnson</h3>
@@ -241,11 +334,50 @@ function App() {
               particular expertise in curly and coily hair types. She embraces
               natural beauty.
             </p>
-            <button className="book-btn">Book with Aisha</button>
+            <button
+              className="book-btn"
+              onClick={() => scrollToSection("book")}
+            >
+              Book with Aisha
+            </button>
           </div>
         </div>
       </section>
 
+      {/* Lookbook (filterable gallery) */}
+      <section id="lookbook" className="lookbook">
+        <div className="section-header">
+          <h2>Lookbook</h2>
+          <div className="divider"></div>
+          <p>Real results from our team — filter by focus area.</p>
+        </div>
+
+        <div className="filter-bar">
+          {["All", "Color", "Cuts", "Texture", "Scalp"].map((f) => (
+            <button
+              key={f}
+              className={`filter-btn ${filter === f ? "active" : ""}`}
+              onClick={() => setFilter(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        <div className="gallery">
+          {visibleItems.map((item) => (
+            <figure className="gallery-item" key={item.id}>
+              <img src={item.img} alt={item.alt} loading="lazy" />
+              <figcaption>
+                <span className="chip">{item.category}</span>
+                {item.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Best Practices */}
       <section id="practices" className="practices">
         <div className="section-header">
           <h2>Best Practices for Hair & Skin Health</h2>
@@ -308,6 +440,7 @@ function App() {
         </div>
       </section>
 
+      {/* Reviews */}
       <section id="reviews" className="reviews">
         <div className="section-header">
           <h2>Client Testimonials</h2>
@@ -376,6 +509,89 @@ function App() {
         </div>
       </section>
 
+      {/*  Book */}
+      <section id="book" className="book">
+        <div className="section-header">
+          <h2>Book an Appointment</h2>
+          <div className="divider"></div>
+          <p>
+            We’ll confirm within one business day. For same-week openings,
+            please call the front desk.
+          </p>
+        </div>
+
+        <form className="book-form" onSubmit={handleBookSubmit}>
+          <div className="two-col">
+            <input
+              required
+              type="text"
+              name="firstName"
+              placeholder="First name"
+            />
+            <input
+              required
+              type="text"
+              name="lastName"
+              placeholder="Last name"
+            />
+          </div>
+
+          <div className="two-col">
+            <input required type="email" name="email" placeholder="Email" />
+            <input type="tel" name="phone" placeholder="Phone (optional)" />
+          </div>
+
+          <div className="two-col">
+            <select name="stylist" defaultValue="">
+              <option value="" disabled>
+                Preferred stylist
+              </option>
+              <option>Sophia Reynolds</option>
+              <option>Marcus Chen</option>
+              <option>Elena Rodriguez</option>
+              <option>Aisha Johnson</option>
+              <option>Any available</option>
+            </select>
+
+            <select name="service" defaultValue="">
+              <option value="" disabled>
+                Service
+              </option>
+              <option>Gloss / Maintenance</option>
+              <option>Balayage / Lightening</option>
+              <option>Cut & Finish</option>
+              <option>Curly Shaping</option>
+              <option>Scalp Therapy</option>
+            </select>
+          </div>
+
+          <div className="two-col">
+            <input type="date" name="date" />
+            <input type="time" name="time" />
+          </div>
+
+          <textarea
+            name="notes"
+            placeholder="Notes (goals, sensitivities, color history)"
+          ></textarea>
+
+          <label className="upload">
+            <span>Optional: upload inspiration image</span>
+            <input type="file" name="inspo" accept="image/*" />
+          </label>
+
+          <div className="book-actions">
+            <button className="primary-btn" type="submit">
+              Submit Request
+            </button>
+            <a className="secondary-btn" href="tel:+12125551234">
+              Call Front Desk
+            </a>
+          </div>
+        </form>
+      </section>
+
+      {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-logo">
